@@ -1,374 +1,602 @@
+<p align="center">
+  <a href="https://github.com/BOSS294/KoshFlow/releases">
+    <img src="https://img.shields.io/badge/Download-Windows%20Release-C9E86A?style=for-the-badge&labelColor=171916" alt="Download Windows Release">
+  </a>
+  <a href="https://github.com/BOSS294/KoshFlow">
+    <img src="https://img.shields.io/badge/GitHub-Repository-171916?style=for-the-badge&logo=github&logoColor=C9E86A" alt="GitHub Repository">
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-v0.6.3-C9E86A?style=flat-square&labelColor=171916" alt="Version 0.6.3">
+  <img src="https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-171916?style=flat-square&labelColor=C9E86A" alt="Windows 10 and 11">
+  <img src="https://img.shields.io/badge/Python-3.11%2B-171916?style=flat-square&logo=python&logoColor=C9E86A" alt="Python 3.11 or newer">
+  <img src="https://img.shields.io/badge/UI-PySide6%20%7C%20Qt-171916?style=flat-square&labelColor=C9E86A" alt="PySide6 and Qt">
+  <img src="https://img.shields.io/badge/Database-SQLite-171916?style=flat-square&labelColor=C9E86A" alt="SQLite">
+  <img src="https://img.shields.io/badge/Status-Active%20Development-171916?style=flat-square&labelColor=C9E86A" alt="Active Development">
+  <img src="https://img.shields.io/badge/Tests-101%20passed%20in%20v0.6.3-171916?style=flat-square&labelColor=C9E86A" alt="101 tests passed in the v0.6.3 validation run">
+</p>
+
 # KoshFlow
 
-**KoshFlow is a Windows-first desktop workspace for billing, inventory, purchasing, customer and supplier records, accounting reports, and branded business documents.** It is designed around local data storage, a keyboard-friendly workflow, and a consistent light/dark interface.
+**A local-first business management and accounting desktop application for Windows.**
 
-- **Source version:** `0.6.3`
-- **Database schema:** `7`
-- **Primary platform:** Windows 10/11 (x64)
-- **Runtime:** Python 3.11 or newer
-- **Desktop UI:** PySide6 / Qt
-- **Storage:** SQLite in the current user's local application-data directory
-- **Document engine:** ReportLab and Pillow
-- **Maintainer:** Mayank Chawdhari (BOSS294)
+KoshFlow brings billing, inventory, purchasing, customer and supplier management, accounting reports, and professional business documents into one workspace. It is built with Python and PySide6, with a SQLite database stored locally on the user's computer.
 
-> **Project status:** KoshFlow is an actively developed desktop application. The current source contains substantial billing, inventory, purchasing and accounting workflows, but it has not yet completed an independent production-security review, code signing, or a formal statutory-tax-compliance certification. Test with a copy of your data before using a new build for live transactions.
 
-## Contents
 
-- [Product overview](#product-overview)
+
+
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
 - [Screenshots](#screenshots)
 - [Features](#features)
-- [Download the Windows executable](#download-the-windows-executable)
-- [Install and run from source](#install-and-run-from-source)
-- [First-run setup](#first-run-setup)
-- [User guides](#user-guides)
-- [Keyboard workflow](#keyboard-workflow)
-- [Data, backups and privacy](#data-backups-and-privacy)
-- [Architecture for developers](#architecture-for-developers)
-- [Run tests](#run-tests)
-- [Build a Windows executable](#build-a-windows-executable)
-- [Publish the website with GitHub Pages](#publish-the-website-with-github-pages)
-- [Release history](#release-history)
-- [Known boundaries](#known-boundaries)
+- [Download for Windows](#download-for-windows)
+- [Installation from Source](#installation-from-source)
+- [First-Run Setup](#first-run-setup)
+- [User Guide](#user-guide)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Application Data and Privacy](#application-data-and-privacy)
+- [Architecture](#architecture)
+- [Developer Setup](#developer-setup)
+- [Testing](#testing)
+- [Building the Windows Executable](#building-the-windows-executable)
+- [GitHub Pages Website](#github-pages-website)
+- [Release History](#release-history)
+- [Known Limitations](#known-limitations)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Product overview
+## Project Overview
 
-KoshFlow brings daily business operations into one desktop workspace. The goal is to reduce the need to move between disconnected billing, stock, customer, supplier and reporting tools, while retaining control over local business data.
+KoshFlow is designed to help businesses manage everyday operations without depending on a hosted business database.
 
-The application uses a 60/30/10 visual system: white or neutral surfaces, charcoal structure, and citron-lime (`#C9E86A`) for meaningful emphasis. Light and dark themes, typography preferences, UI scaling and control-density options are part of the desktop settings.
+The project follows three core principles:
 
-### Screenshots
+- **Local-first data:** Business records are stored locally by default.
+- **Connected workflows:** Billing, purchasing, inventory and accounting are designed to use related business records.
+- **Practical desktop UX:** A keyboard-friendly interface, customizable appearance, clear financial information and professional PDF documents.
 
-Screenshots in `assets/site/` are sanitized for public documentation. Identifying profile details and actual transaction values have been replaced or cropped out.
+### Project Information
 
-| Workspace | Screenshot |
+| Property | Details |
 |---|---|
-| Overview dashboard | ![KoshFlow Overview dashboard with business metrics, chart and quick actions](assets/site/overview.webp) |
-| Billing workspace | ![Billing hub with quick billing, bill management and PDF Studio actions](assets/site/billing.webp) |
-| Quick Billing | ![Keyboard-first Quick Billing interface with product search and current sale](assets/site/quick-billing.webp) |
-| Invoice theme designer | ![PDF Studio theme library and document-design controls](assets/site/pdf-studio.webp) |
-| Reports | ![Reports workspace with report selector and export controls](assets/site/reports.webp) |
-| Bill register | ![Invoice register layout with private transaction rows redacted](assets/site/bill-register.webp) |
+| Application | KoshFlow |
+| Source version | `0.6.3` |
+| Database schema | `7` |
+| Target platform | Windows 10/11, x64 |
+| Runtime | Python 3.11 or newer |
+| Desktop framework | PySide6 / Qt Widgets |
+| Database | SQLite |
+| PDF generation | ReportLab and Pillow |
+| Testing | pytest |
+| Executable packaging | PyInstaller |
+| Maintainer | Mayank Chawdhari (BOSS294) |
+
+KoshFlow uses a 60/30/10 visual system: light neutral surfaces, charcoal structure, and citron-lime (`#C9E86A`) accents. Light and dark themes, font selection, interface scaling and control sizing are supported by the desktop settings.
+
+## Screenshots
+
+The following screenshots illustrate the application interface. Images in `assets/site/` are intended for public documentation and should use sanitized sample records.
+
+### Business Overview
+
+![KoshFlow business overview with financial metrics, revenue trend and quick actions](assets/site/overview.webp)
+
+### Billing Workspace
+
+![Billing workspace with Quick Billing, bill management and PDF Studio](assets/site/billing.webp)
+
+### Quick Billing
+
+![Keyboard-first checkout with product search and current sale](assets/site/quick-billing.webp)
+
+### Invoice Theme Designer
+
+![Invoice theme library and document customization interface](assets/site/pdf-studio.webp)
+
+### Reports
+
+![Financial and operational reports with export controls](assets/site/reports.webp)
+
+### Bill Register
+
+![Invoice register with searchable business documents](assets/site/bill-register.webp)
 
 ## Features
 
-### Billing and documents
+### 1. Billing and Invoice Management
 
-- Create, review, issue, search, filter and manage invoices.
-- Draft lifecycle and controls for issued-document correction/cancellation.
-- B2B/B2C document classification and line-level quantities, discounts and configurable tax rates.
-- Partial or full customer-payment recording and balance tracking.
-- Quick Billing for counter sales, with catalog search, customer lookup, quantity entry and stock validation.
-- PDF generation from saved bills and an export/document area.
+KoshFlow provides a local invoice workflow for creating and managing business documents.
 
-### PDF Studio and invoice branding
+- Create and manage draft invoices.
+- Issue invoices and track payment status.
+- Search and filter the invoice register.
+- Record partial and full customer payments.
+- Track outstanding balances.
+- Support B2B and B2C invoice classification.
+- Configure item quantities, discounts and tax rates.
+- Generate PDFs from saved bills.
+- Maintain documented cancellation and correction workflows for issued documents.
 
-- Starter themes and custom reusable invoice templates.
-- Whole-document design controls: page size, composition, typography, background/surface/text colors, rules and highlighted totals.
-- Live invoice preview and saved theme selection.
-- Optional business logo, business name, address, contact information and website.
-- Optional bank details, UPI ID and QR image on invoices.
-- Invoice footer attribution: “Generated by KoshFlow”.
-- PDF layouts designed for multi-page documents and supported paper sizes.
+Issued financial records should not be silently overwritten. Use the appropriate payment, cancellation or correction workflow for the document's state.
 
-### Inventory and purchasing
+### 2. Quick Billing
 
-- Product catalog with SKU generation, categories, units, HSN/SAC fields and pricing.
-- Stock adjustments and a traceable stock-movement register.
-- Suppliers, purchase orders, partial receipt workflows and purchase bills.
-- Supplier payments, supplier returns and credit tracking.
-- Reorder/low-stock reporting and inventory valuation using recorded moving-average cost.
-- Stock changes are linked to source transactions where the workflow supports it; stock should not be adjusted outside the application's transaction controls.
+Quick Billing is designed for fast counter sales and retail workflows.
 
-### Customers and suppliers
+- Search catalog products by name, SKU or barcode.
+- Enter the quantity separately.
+- Add selected products to the current sale.
+- Enter customer name and phone information.
+- Select matching customer suggestions.
+- Save or reuse customer records through the sale workflow.
+- Check stock availability before completing a sale.
+- Record the payment method and sale total.
 
-- Local customer and supplier records, contact information and business identifiers.
-- Customer autocomplete in Quick Billing and walk-in customer persistence after a completed sale.
-- Customer balances, supplier payables, transaction histories and searchable directories.
-- CSV exports in supported registers and reports.
+Inventory-linked sales update stock when the invoice is successfully issued.
 
-### Accounting and reports
+### 3. PDF Studio and Invoice Customization
 
-- Chart of accounts, double-entry journals and manual journal vouchers.
-- Trial Balance, Trading Account, Profit & Loss, Balance Sheet, Cash Flow Statement and General Ledger.
-- Journal register, individual voucher export, accounting-period history and supporting sales/purchase registers.
-- Operational reports including inventory valuation, stock movements, customer balances, supplier payables, payment registers, top-selling products and GST/HSN-SAC summaries.
-- PDF and CSV export for supported reports.
-- Accounting-period locking controls.
+PDF Studio provides reusable invoice themes and document-design controls.
 
-These reports are generated from local records and accounting entries. Review them against source documents before relying on them for statutory or financial decisions.
+- Starter invoice themes.
+- Saved and reusable templates.
+- Page-size and document-composition settings.
+- Typography, text color and background customization.
+- Panel, border, rule and highlighted-total styling.
+- Live invoice preview.
+- Optional business logo and branded header.
+- Business address, phone number and website.
+- Optional bank details, UPI ID and payment QR image.
+- Multipage document support.
+- Invoice attribution: `Generated by KoshFlow`.
 
-### Dashboard and notifications
+The final document should be reviewed before it is sent to a customer, especially when changing mandatory invoice fields or tax-related information.
 
-- Dashboard metrics and charts sourced from available local business records.
-- Quick actions for common workflows.
-- Persistent in-app notification inbox and desktop-notification integration where the operating system supports it.
-- Notification preferences and test action in Settings.
-- Notification delivery depends on Windows notification permissions and system-tray availability; an in-app fallback is used where available.
+### 4. Inventory Management
 
-### Security and personalization
+Inventory features cover the product catalog and stock lifecycle.
 
-- Local user setup and login, with Argon2 password hashing.
-- Role-aware navigation and service-level permission checks in supported workflows.
-- Locally stored user preferences, profile image, light/dark themes, font selection, UI scale and control sizing.
-- Local database, logs, exports and backup directories.
+- Product creation and editing.
+- Automatic SKU generation.
+- Product categories and units.
+- HSN/SAC fields.
+- Purchase and selling prices.
+- Configurable tax rates.
+- Opening stock and stock adjustments.
+- Low-stock reports.
+- Inventory valuation using recorded moving-average cost.
+- Stock movement history with source references.
+- CSV export where supported.
 
-## Download the Windows executable
+Product quantities must be interpreted according to their units. Pieces, kilograms and litres should not be combined into a single quantity total.
 
-The public website is configured to find `KoshFlow.exe` attached to the latest GitHub Release. The repository also includes a GitHub Actions workflow that builds the Windows executable when a version tag such as `v0.6.4` is pushed.
+### 5. Purchasing and Suppliers
 
-1. Open the [KoshFlow Releases page](https://github.com/BOSS294/KoshFlow/releases).
-2. Open the latest stable release.
-3. Download `KoshFlow.exe` from its assets.
-4. Save it to a folder you control and run it. Your local application data is stored separately in your user profile.
+- Supplier records and contact details.
+- Purchase orders.
+- Partial and complete purchase receipts.
+- Purchase-bill drafts generated from receipt workflows.
+- Supplier invoice references.
+- Supplier payments.
+- Supplier returns and credits.
+- Payable tracking.
+- Purchase registers and reports.
 
-The packaged file is a **portable executable**, not a traditional setup wizard. Code signing is not configured in this repository snapshot, so Windows may display publisher or reputation warnings. Download only from the official project repository and do not bypass security warnings unless you have independently verified the source and release artifact.
+Purchase-bill drafts should be matched to the supplier's actual invoice or reference before posting.
 
-If the Releases page has no executable asset yet, use [Install and run from source](#install-and-run-from-source) or build the executable as described below. The repository slug is configured as `BOSS294/KoshFlow`; update the website configuration and links if the final GitHub repository uses a different owner or name.
+### 6. Customer Management
 
-## Install and run from source
+- Customer records and contact information.
+- Customer lookup in Quick Billing.
+- Walk-in customer persistence after completed counter sales.
+- Customer balances and invoice history.
+- Customer payment tracking.
+- Searchable customer registers.
+- CSV export in supported workflows.
+
+### 7. Accounting and Financial Reports
+
+The accounting workspace includes a double-entry accounting foundation and financial reports.
+
+Supported report categories include:
+
+- Chart of Accounts.
+- Journal Register and individual journal vouchers.
+- General Ledger.
+- Trial Balance.
+- Trading Account.
+- Profit and Loss Statement.
+- Balance Sheet.
+- Cash Flow Statement.
+- Accounting-period history.
+- Sales and Purchase Registers.
+- GST and HSN/SAC supporting summaries.
+- Customer balances and supplier payables.
+- Inventory valuation and stock movements.
+- Customer and supplier payment registers.
+
+PDF and CSV export are available for supported reports and registers.
+
+Financial reports should be reconciled against original invoices, purchase bills, payments and journal entries before being relied on for accounting or statutory purposes.
+
+### 8. Business Overview Dashboard
+
+The dashboard is designed to display available business information from local records.
+
+Depending on available and posted records, it can present:
+
+- Sales and invoice metrics.
+- Customer receivables.
+- Supplier payables.
+- Cash and bank figures.
+- Revenue trends.
+- Cash movement.
+- Recent business activity.
+- Quick actions.
+- Business profile information.
+- Upcoming dates and stock alerts.
+
+The dashboard should not substitute fabricated metrics for missing records. Where a module has no data, the interface should present an appropriate empty state.
+
+### 9. Notifications
+
+KoshFlow includes a local notification inbox and desktop-notification integration.
+
+Notification categories include supported events such as:
+
+- Overdue customer invoices.
+- Approaching payment deadlines.
+- Low or out-of-stock products.
+- Supplier and purchasing reminders.
+- Configured compliance dates.
+
+Notification preferences and a test action are available in Settings. Native desktop delivery depends on operating-system support and permissions; in-app notifications provide a fallback where available.
+
+### 10. Appearance and Personalization
+
+- Light and dark themes.
+- Font selection.
+- User interface scaling.
+- Control sizing and input-width preferences.
+- Local profile image and display name.
+- Keyboard-friendly interactions.
+- Theme-aware controls and navigation.
+
+### 11. Local Data and Backups
+
+- Local SQLite storage.
+- Local workspace authentication.
+- Argon2 password hashing.
+- Role-aware navigation and supported permission checks.
+- Database schema migrations.
+- Local backup creation and restoration workflows.
+- Local application logs and exports.
+
+Backup files in this version are standard SQLite backup files and are not encrypted by the application at rest.
+
+---
+
+## Download for Windows
+
+The intended end-user distribution is a portable Windows executable named `KoshFlow.exe`.
+
+**[Open KoshFlow Releases](https://github.com/BOSS294/KoshFlow/releases)**
+
+1. Open the Releases page.
+2. Select the latest stable release.
+3. Download `KoshFlow.exe` from the release assets.
+4. Save it in a folder you control.
+5. Run the executable and complete first-run setup if required.
+
+The source snapshot does not itself contain a compiled Windows executable. The executable must be generated and published through the release workflow.
+
+The current packaging configuration does not establish Windows code signing. Windows may display publisher or reputation warnings. Download release artifacts only from the official repository and verify their source before running them.
+
+## Installation from Source
 
 ### Requirements
 
-- Windows 10/11 x64 is the intended desktop target.
+- Windows 10 or Windows 11, x64.
 - Python 3.11 or newer.
-- Internet access for the initial dependency installation only.
-- A writable user-data directory for the SQLite database, logs, exports and backups.
+- Internet access for initial dependency installation.
+- A writable local application-data directory.
 
-### Setup
-
-Clone or download the source repository, then run these commands from the project root in PowerShell:
+### Clone the Repository
 
 ```powershell
 git clone https://github.com/BOSS294/KoshFlow.git
 cd KoshFlow
+```
 
+### Create a Virtual Environment
+
+```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
+
+### Install Dependencies
+
+```powershell
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+### Launch the Application
+
+```powershell
 python main.py
 ```
 
-If PowerShell blocks virtual-environment activation, use the Python executable directly instead:
+If PowerShell blocks virtual-environment activation, call the environment's Python executable directly:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe main.py
 ```
 
-The application opens first-run setup if the database has no local user; otherwise it opens the login screen.
+The application opens the first-run setup flow if the local database has no user account; otherwise, it opens the login screen.
 
-## First-run setup
+## First-Run Setup
 
-1. Launch KoshFlow and create the local owner account.
-2. Enter the business's registered/legal name and any applicable business details.
-3. Configure state/UT, contact information, and GST/PAN details only where applicable.
-4. Open Settings to set invoice branding, payment details, appearance preferences and notification preferences.
-5. Create a backup before importing or entering substantial live data.
-6. Create catalog products and suppliers before using inventory-linked purchasing or Quick Billing.
+1. Launch KoshFlow.
+2. Create the local owner account.
+3. Enter the registered business name and applicable business details.
+4. Configure contact information, state/UT and tax-registration details where applicable.
+5. Open Settings to configure invoice branding, bank/UPI details and appearance.
+6. Create a verified backup before entering substantial business data.
+7. Add products and suppliers before using inventory-linked sales and purchasing.
 
-Use real legal names, tax registrations and banking details only in your private local workspace. Public screenshots and issue attachments should use sanitized sample records.
+Use actual legal names, tax identifiers and banking details only in your private workspace. Public screenshots and issue attachments should always use sanitized information.
 
-## User guides
+## User Guide
 
-### Create and issue a bill
+### Create and Issue an Invoice
 
-1. Open **Billing** and choose **Create bill**.
-2. Select or enter the customer, add items or services, verify quantities, rates, discount and applicable tax.
-3. Review totals and payment terms.
-4. Save as a draft while it is still being prepared. Issue only after reviewing the document.
-5. Generate the PDF from the saved bill and verify the business identity, customer details, line items, totals and payment instructions before sending it.
+1. Open **Billing**.
+2. Select **Create Bill**.
+3. Select or enter the customer.
+4. Add products or services.
+5. Verify quantities, prices, discounts and applicable tax.
+6. Review the totals and payment terms.
+7. Save as a draft while the document is being prepared.
+8. Issue the invoice only after reviewing the details.
+9. Generate and check the PDF before sending it.
 
-Issued financial documents should not be silently overwritten. Use the available payment, cancellation or correction workflow appropriate to the document's state.
-
-### Use Quick Billing
+### Complete a Quick Sale
 
 1. Open Billing and select **Quick Billing**.
-2. Search a pre-added product by name, SKU or barcode.
-3. Set the quantity separately and add the selected product.
-4. Enter the customer name and phone number where available. Select a matching customer suggestion when shown; otherwise the counter-sale flow can save a new customer record.
-5. Verify the current sale, payment method and total.
-6. Complete the sale only when the items and stock are correct.
+2. Search for a pre-added product.
+3. Select the matching result.
+4. Enter the quantity separately.
+5. Add the product to the current sale.
+6. Enter customer details or select a matching customer.
+7. Review the stock, payment method and total.
+8. Complete the sale only after verifying the transaction.
 
-### Manage inventory and purchases
+### Record a Purchase
 
-1. Create categories and catalog products with the appropriate unit and product details.
-2. Add supplier profiles before recording purchases.
-3. Create a purchase order and receive only quantities actually delivered.
-4. Match the supplier's invoice/reference to the receipt-generated purchase-bill draft before posting it.
-5. Record supplier payments and returns through their dedicated workflows.
-6. Use Stock Movements to trace the source, reason and quantity change.
+1. Add the supplier record.
+2. Create a purchase order where applicable.
+3. Record only the quantities actually received.
+4. Match the generated purchase-bill draft to the supplier invoice.
+5. Verify prices, discounts and taxes.
+6. Post the purchase bill when the received quantities and source document are correct.
+7. Record supplier payments and returns through their appropriate workflows.
 
-HSN/SAC suggestions are assistance, not authoritative tax classification. Confirm the correct classification and applicable rate before issuing statutory invoices.
+### Design an Invoice
 
-### Generate and send PDFs
+1. Open **PDF Studio**.
+2. Choose an existing invoice theme or create a new one.
+3. Configure page size, document composition, typography, colors and branding.
+4. Add the business logo and payment details where required.
+5. Inspect the live preview.
+6. Generate a PDF from the saved invoice.
+7. Verify the final document before sending it.
 
-1. Set the business identity and payment details in Settings.
-2. Open PDF Studio to choose or customize a document theme.
-3. Review the live preview with the intended composition, page size, logo, contacts and payment section.
-4. Generate the PDF from the saved bill.
-5. WhatsApp sharing prepares the message/workflow; where the app opens WhatsApp for manual sharing, attach the generated PDF yourself and confirm the correct recipient.
-
-### Export accounting reports
+### Export Financial Reports
 
 1. Open **Reports**.
-2. Choose the report and applicable date range or as-of date.
-3. Run the report and inspect the displayed source period.
-4. Export PDF for a formatted report or CSV for further analysis.
-5. Reconcile reports with invoice, purchase, payment and journal source records before making accounting or compliance decisions.
+2. Choose the required statement or register.
+3. Set the appropriate date range or as-of date.
+4. Run the report.
+5. Review the reporting period and figures.
+6. Export to PDF for a formatted document or CSV for further analysis.
+7. Reconcile the results with the underlying records before relying on them.
 
-### Configure desktop notifications
+### Test Desktop Notifications
 
-1. Open Settings and choose **Notifications**.
-2. Enable the notification channels and event categories you want.
-3. Use the test action to check whether the native desktop request is submitted or the app uses its in-app fallback.
-4. If Windows doesn't show a native alert, check Windows notification permissions and Focus/Do Not Disturb settings.
+1. Open **Settings → Notifications**.
+2. Enable the channels and event categories you need.
+3. Use the test-notification action.
+4. Check whether the desktop notification appears.
+5. If it does not, check Windows notification permissions and Focus/Do Not Disturb settings.
 
-### Back up and restore
+### Back Up and Restore
 
-1. Open Settings and select **Data & Backups**.
-2. Create a backup and wait for verification to finish.
-3. Keep a second copy outside the computer that contains the working database.
-4. Test restore with a copy before replacing the primary database.
+1. Open **Settings → Data & Backups**.
+2. Create a backup and wait for verification.
+3. Keep a second copy in a separate, protected location.
+4. Test restoration on a copy before replacing the primary database.
 
-Backups in this source version are standard SQLite backup files and are not encrypted by the application. Store them somewhere protected by your operating-system account and appropriate disk encryption.
-
-## Keyboard workflow
-
-Shortcuts can be context-specific; the Quick Billing controls are the primary keyboard-first workflow in this release.
+## Keyboard Shortcuts
 
 | Shortcut | Action |
 |---|---|
 | `F2` | Focus product search in Quick Billing |
-| `Down` | Move from product search into matching results |
-| `Enter` | Add the selected matching product, where a result is selected |
-| `F4` | Begin/confirm Quick Billing checkout flow |
+| `Down` | Move into matching product results |
+| `Enter` | Add the selected product where supported |
+| `F4` | Begin or confirm the Quick Billing checkout flow |
 | `Delete` | Remove the selected sale item when the cart is focused |
-| `Esc` | Clear the product search |
+| `Esc` | Clear product search |
 | `Ctrl+K` | Open the command palette where available |
-| `Ctrl+N` | Start a new bill where the current page supports the shortcut |
+| `Ctrl+N` | Start a new bill where supported |
 
-Shortcuts never replace stock validation or required checkout confirmation. When a shortcut appears not to work, first focus the relevant input/table and verify that the current page supports it.
+Shortcuts are context-specific and do not bypass stock validation or checkout confirmation.
 
-## Data, backups and privacy
+---
 
-- **Default data directory on Windows:** `%LOCALAPPDATA%\KoshFlow\`
-- Database: `koshflow.sqlite3`
-- Supporting directories: `backups/`, `logs/`, and `exports/`
-- `KOSHFLOW_HOME` can override the data directory for portable/test runs.
-- The app is local-first; it does not require a KoshFlow-hosted account or cloud database to open the local workspace.
-- Windows desktop notifications depend on operating-system support and permissions.
-- Opening WhatsApp is an external action. The user remains responsible for confirming recipient and attachment.
-- AI Business Insights is currently a coming-soon area; do not assume a live AI analysis provider is connected.
-- Backup files are not encrypted at rest by the app in this release.
+## Application Data and Privacy
 
-Do not attach a real business database, unredacted invoice, customer list, phone number, bank details, or backup file to a public GitHub issue.
+### Default Windows Data Directory
 
-## Architecture for developers
+```text
+%LOCALAPPDATA%\KoshFlow\
+```
 
-KoshFlow separates its Qt UI from business services and database operations. The intended rule is that financial calculations and transaction rules live in services, not in presentation widgets.
+The directory contains the local database and supporting application data, including backups, logs and exports.
 
-### Technology
+The database filename in this source version is:
 
-| Area | Implementation |
+```text
+koshflow.sqlite3
+```
+
+The application supports `KOSHFLOW_HOME` for overriding the data directory in portable or testing scenarios.
+
+### Data Handling
+
+- The current design is local-first and does not require a KoshFlow-hosted database.
+- Desktop notifications depend on operating-system capabilities and permissions.
+- WhatsApp sharing involves an external application, and the user must verify the recipient and attachment.
+- AI Business Insights is a coming-soon area; a live AI provider is not represented as active.
+- Backup files are not encrypted at rest by the application.
+- Public GitHub issues must not contain production databases, customer records, phone numbers, bank details or unredacted invoices.
+
+Protect the application-data directory and backups using appropriate operating-system account permissions and disk encryption.
+
+## Architecture
+
+KoshFlow separates its UI layer from service logic and database operations. Financial calculations and transaction rules should remain in services rather than presentation widgets.
+
+### Technology Stack
+
+| Area | Technology |
 |---|---|
-| Desktop UI | PySide6 / Qt Widgets |
 | Language | Python 3.11+ |
-| Database | SQLite using the standard library and application schema migrations |
-| Authentication | `argon2-cffi` password hashing |
+| Desktop UI | PySide6 / Qt Widgets |
+| Local database | SQLite |
+| Authentication | `argon2-cffi` |
 | Invoice and accounting PDFs | ReportLab |
-| Logo/image processing | Pillow |
+| Image processing | Pillow |
 | Testing | pytest |
-| Windows executable | PyInstaller spec and GitHub Actions release workflow |
+| Windows executable | PyInstaller |
+| Automation | GitHub Actions |
 
-### High-level project layout
+### Project Structure
 
 ```text
 KoshFlow/
-├── assets/                   # App icon, brand mark, public-site screenshots
-├── .github/workflows/        # Tests and tagged Windows executable release
+├── assets/
+│   └── site/                  # Sanitized screenshots for GitHub Pages
+├── .github/
+│   └── workflows/             # Tests and Windows release automation
 ├── koshflow/
-│   ├── core/                 # Database, schema migrations, permissions, backups, session
-│   ├── services/             # Auth, billing, inventory, customers, accounting, reports,
-│   │                         # PDF generation, dashboard, notifications and setup
+│   ├── core/                  # Database, migrations, permissions and backups
+│   ├── services/              # Billing, inventory, accounting, reports and more
 │   ├── ui/
-│   │   ├── pages/             # Dashboard, billing, inventory, settings and report screens
+│   │   ├── pages/             # Application screens
 │   │   ├── components.py      # Reusable Qt controls
 │   │   ├── icons.py           # SVG icon helpers
-│   │   ├── styles.py          # Light/dark design tokens and global widget styles
-│   │   └── main_window.py     # Workspace shell, navigation and global actions
-│   ├── app.py                 # Qt startup, logging, data setup and login gateway
-│   └── config.py              # Version, paths and application identifiers
-├── tests/                     # Service, accounting, workflow, reporting and UI contract tests
-├── KoshFlow.spec              # PyInstaller one-file build configuration
-├── index.html                 # Static GitHub Pages site
-├── main.py                    # Source launcher
+│   │   ├── styles.py          # Light/dark design system
+│   │   └── main_window.py     # Navigation and workspace shell
+│   ├── app.py                 # Application startup
+│   └── config.py              # Version and application configuration
+├── tests/                     # Regression and service tests
+├── KoshFlow.spec              # PyInstaller build configuration
+├── index.html                 # GitHub Pages website
+├── main.py                    # Application entry point
 ├── pyproject.toml
 └── requirements.txt
 ```
 
-### Design and service boundaries
+### Development Principles
 
-- UI pages gather input and render service results.
-- Services validate workflow rules, enforce transaction boundaries and return structured records.
-- The database layer initializes the schema and applies additive migrations.
-- Decimal arithmetic is used for monetary calculations; avoid binary floating-point for accounting totals.
-- Posted documents need auditable correction/reversal behavior rather than silent mutation.
-- Reports should state their reporting period and use journal/source records as their authority.
-- Store user preferences locally and keep customer/business data out of logs and public test fixtures.
+- Keep UI widgets separate from business services.
+- Apply financial calculations using decimal-safe monetary arithmetic.
+- Keep schema migrations controlled and testable.
+- Preserve auditability for posted bills and stock movements.
+- Use database transactions for operations affecting financial or inventory records.
+- Design reports around journal and source-document data.
+- Avoid storing customer or financial data in public logs and test fixtures.
 
-### Run developer checks
+## Developer Setup
+
+Install the project requirements and testing tools:
 
 ```powershell
 python -m pip install -r requirements.txt
 python -m pip install pytest
+```
+
+### Run the Test Suite
+
+```powershell
 python -m compileall -q koshflow main.py
 python -m pytest -q
 ```
 
-The v0.6.3 validation run recorded **101 tests passing**. Run the test suite again for every code change and report the result from the branch being submitted rather than copying a historical count.
+Run the complete tests after changing the source, rather than relying on results from an earlier version.
 
-## Build a Windows executable
+Financial changes should include tests for debit/credit balance, duplicate posting, reversals and impacts on linked balances or stock quantities.
 
-The repository includes `KoshFlow.spec` and `.github/workflows/windows-release.yml`.
+### Build a Windows Executable
 
-### Local build
+Install PyInstaller:
 
 ```powershell
-python -m pip install -r requirements.txt
 python -m pip install pyinstaller
+```
+
+Build the portable executable:
+
+```powershell
 python -m PyInstaller --noconfirm --clean KoshFlow.spec
 ```
 
-The expected output is `dist\KoshFlow.exe`. This is a portable single-file executable, not an installer wizard. PyInstaller bundles the Python runtime and application dependencies; the user's database stays in the per-user data directory.
+The expected output is:
 
-### Publish a release asset
+```text
+dist/KoshFlow.exe
+```
 
-1. Update version constants and release notes for the new version.
-2. Run the full tests on the intended commit.
-3. Commit and push the branch.
-4. Create and push a version tag, for example `v0.6.4`.
-5. The Windows release workflow runs the test suite, builds `KoshFlow.exe` and attaches it to a GitHub Release.
-6. Check the release page and download/run the artifact on a clean Windows account before announcing the release.
+The executable is a portable single-file build, not an installer wizard. Application data remains in the user's data directory.
 
-The executable is unsigned in the current configuration. Add Windows code-signing and verify release hashes before distributing a production release broadly.
+### Publish a Windows Release
 
-## Publish the website with GitHub Pages
+The repository includes a Windows release workflow.
 
-`index.html` is a static page at the repository root. It uses local CSS and JavaScript and the sanitized images under `assets/site/`.
+1. Update version constants and release notes.
+2. Run compilation and the full test suite.
+3. Commit and push the intended release commit.
+4. Create and push a version tag, such as `v0.6.4`.
+5. Allow the Windows workflow to test and package the application.
+6. Verify the published executable on a clean Windows account before announcing the release.
 
-1. Push this repository to GitHub.
-2. In **Settings → Pages**, select deployment from the `main` branch and `/ (root)`.
-3. Wait for the Pages deployment to complete.
-4. The page's release widget reads the repository's GitHub Releases API and looks for `KoshFlow.exe`. If the API is unavailable or no release exists, it falls back to the releases page.
-5. Confirm that the repository setting in `index.html` matches the real owner/repository slug. The default is `BOSS294/KoshFlow`.
+Code signing and release-hash verification should be added before broad production distribution.
 
-The release workflow creates the executable link target; until a tagged release has published that asset, the site cannot provide a downloadable binary. Update the version highlights and release notes when a new version is published.
+## GitHub Pages Website
 
-## Release history
+The repository includes a static website in `index.html`.
+
+To publish it:
+
+1. Push the repository to GitHub.
+2. Open **Settings → Pages**.
+3. Configure deployment from the `main` branch and `/ (root)`.
+4. Wait for the deployment to finish.
+5. Confirm the repository slug in the website configuration.
+6. Publish a GitHub Release with the expected `KoshFlow.exe` asset.
+
+The default repository slug is `BOSS294/KoshFlow`. Update the website links if the final repository uses a different owner or name.
+
+The website's download section checks GitHub Releases for an executable asset. If no release asset exists, users are directed to the Releases page instead of being given a fabricated download link.
+
+## Release History
 
 ### v0.6.3
 
@@ -379,8 +607,8 @@ The release workflow creates the executable link target; until a tagged release 
 
 ### v0.6.2
 
-- Connected operational dashboard metrics and added operational report queries.
-- Expanded the Reports workspace and added local notification persistence.
+- Connected operational dashboard metrics.
+- Expanded operational reports and local notification persistence.
 - Removed the Services navigation module.
 
 ### v0.6.1
@@ -390,31 +618,58 @@ The release workflow creates the executable link target; until a tagged release 
 
 ### v0.6.0
 
-- Added the double-entry accounting foundation and core financial statements.
-- Improved PDF business branding and accounting exports.
+- Added the double-entry accounting foundation.
+- Expanded financial statements and accounting exports.
+- Improved PDF business branding.
 
-Earlier release history is available through the Git commit/tag history once published.
+Earlier release history can be reviewed through Git tags and commit history after publication.
 
-## Known boundaries
+## Known Limitations
 
-- AI Business Insights is a coming-soon area; a live AI provider is not represented as active.
-- Reports can prepare GST-supporting summaries, but statutory return filing and official GST portal submissions are not implemented by the report export itself.
-- E-invoice, e-way bill, bank-feed and automated WhatsApp document delivery integrations require separate implementation and verification.
-- Cloud synchronization and multi-device collaboration are not part of the local-first data model in this release.
-- Backup encryption at rest and a formal security audit remain outstanding.
-- This source snapshot does not include a signed Windows executable; the tagged release workflow must be run to publish one.
+KoshFlow is actively developed. The current source should not be interpreted as a fully certified production accounting or tax-compliance product.
+
+- AI Business Insights is not yet connected to a live AI provider.
+- GST-supporting reports do not themselves file statutory returns.
+- Official GST portal filing, e-invoicing and e-way bill integrations remain separate work.
+- Automated WhatsApp document delivery is not implemented by the manual sharing workflow.
+- Cloud synchronization and multi-device collaboration are not part of the current local-first data model.
+- Backup encryption at rest and an independent security review remain outstanding.
+- The Windows executable must be built and published through the release process; it is not included in the source snapshot.
+- The current executable configuration is not code-signed.
+
+Always back up business data before upgrading, and test new builds against a copy of the database before using them for live financial transactions.
 
 ## Contributing
 
-1. Open an issue describing the defect or enhancement and the affected workflow.
-2. Do not attach production databases, invoices or personal/customer data.
-3. Create a focused branch and keep changes within the requested scope.
-4. Add or update tests for service logic, migrations and financial/reporting behavior.
-5. Run `python -m compileall -q koshflow main.py` and `python -m pytest -q`.
-6. Include clear reproduction steps and screenshots with sanitized data for UI changes.
+Contributions and defect reports should be focused, reproducible and safe to share publicly.
 
-Accounting changes should include examples that prove debit/credit balance, source-document idempotency, and the impact on linked balances or stock quantities.
+1. Open an issue describing the problem or proposed enhancement.
+2. Include reproduction steps and sanitized screenshots where relevant.
+3. Do not attach production databases, invoices or customer information.
+4. Create a focused branch and keep changes within the intended scope.
+5. Add or update tests for service logic, database migrations and financial behavior.
+6. Run compilation and the full test suite.
+7. Submit a pull request explaining the changes and their validation.
+
+Accounting changes should demonstrate balanced journal entries, idempotent source-document posting and the impact on related balances and inventory.
 
 ## License
 
-The current source snapshot does not include a `LICENSE` file. Public visibility on GitHub does not by itself grant permission to reuse, modify or redistribute the project. The repository owner should add a clear license before accepting external code contributions or announcing the project as open source.
+**No license has been specified in this source snapshot.**
+
+A public GitHub repository does not automatically grant permission to use, modify or redistribute its contents. Add an appropriate `LICENSE` file before presenting KoshFlow as an open-source project or accepting external code contributions.
+
+---
+
+<p align="center">
+  <strong>KoshFlow</strong><br>
+  Local business management. Clear financial records. Better workflows.
+</p>
+
+<p align="center">
+  <a href="https://github.com/BOSS294/KoshFlow/releases">Releases</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/BOSS294/KoshFlow/issues">Report an Issue</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/BOSS294/KoshFlow">Source Repository</a>
+</p>
