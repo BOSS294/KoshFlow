@@ -1,0 +1,5 @@
+# KoshFlow v0.6.3 — local-first billing, inventory, purchasing, double-entry accounting and PDF Studio
+PySide6>=6.8,<7.0
+argon2-cffi>=23.1,<26.0
+reportlab>=4.2,<5.0
+Pillow>=10.0,<13.0
