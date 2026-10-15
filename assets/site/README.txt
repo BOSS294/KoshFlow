@@ -1,1 +1,1 @@
-Sanitized screenshots for the KoshFlow public project site. Real user identity and actual financial/customer records have been replaced or cropped out. Keep screenshots scrubbed before publishing.
+Public documentation screenshots. Customer identity, phone details and live financial values have been replaced with neutral sample content before publishing.

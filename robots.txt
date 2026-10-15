@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /KoshFlow/
+
+Sitemap: https://boss294.github.io/KoshFlow/sitemap.xml

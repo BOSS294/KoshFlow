@@ -18,17 +18,20 @@
 
 # KoshFlow
 
-**A local-first business management and accounting desktop application for Windows.**
+**KoshFlow is a Windows-first desktop workspace for billing, inventory, purchasing, customer and supplier records, accounting reports, and branded business documents.** It is designed around local data storage, a keyboard-friendly workflow, and a consistent light/dark interface.
 
-KoshFlow brings billing, inventory, purchasing, customer and supplier management, accounting reports, and professional business documents into one workspace. It is built with Python and PySide6, with a SQLite database stored locally on the user's computer.
+- **Source version:** `0.6.3`
+- **Database schema:** `7`
+- **Primary platform:** Windows 10/11 (x64)
+- **Runtime:** Python 3.11 or newer
+- **Desktop UI:** PySide6 / Qt
+- **Storage:** SQLite in the current user's local application-data directory
+- **Document engine:** ReportLab and Pillow
+- **Maintainer:** Mayank Chawdhari (BOSS294)
 
+> **Project status:** KoshFlow is an actively developed desktop application. The current source contains substantial billing, inventory, purchasing and accounting workflows, but it has not yet completed an independent production-security review, code signing, or a formal statutory-tax-compliance certification. Test with a copy of your data before using a new build for live transactions.
 
-
-
-
----
-
-## Table of Contents
+## Contents
 
 - [Project Overview](#project-overview)
 - [Screenshots](#screenshots)
@@ -55,9 +58,7 @@ KoshFlow is designed to help businesses manage everyday operations without depen
 
 The project follows three core principles:
 
-- **Local-first data:** Business records are stored locally by default.
-- **Connected workflows:** Billing, purchasing, inventory and accounting are designed to use related business records.
-- **Practical desktop UX:** A keyboard-friendly interface, customizable appearance, clear financial information and professional PDF documents.
+### Screenshots
 
 ### Project Information
 
